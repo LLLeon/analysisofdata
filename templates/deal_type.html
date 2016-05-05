@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="ui equal width grid" style="width: 70%; margin: 5px 0 5px 0">
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment">
+                    <div class="ui compact menu">
+                        <div class="ui simple dropdown item">
+                            Deal detail
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="item" id="type">deal type</div>
+                                <div class="item" id="area">deal area</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui container" id="container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block deal_type %}
+    <script>
+    $('#type').click(function (){
+        $('#container').highcharts({
+            credits: {
+                enabled: false
+            },
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: '一天内交易物品种类分布'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            series: {{ deal_type|safe }}
+    });
+});
+    </script>
+    <script>
+    $('#area').click(function (){
+        $('#container').highcharts({
+            credits: {
+                enabled: false
+            },
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: '一天内交易物品地区分布'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            series: {{ deal_area|safe }}
+    });
+});
+    </script>
+{% endblock %}

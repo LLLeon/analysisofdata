@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/semantic.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/semantic.js' %}"></script>
+</head>
+<body>
+	<div class="ui thin left visible sidebar inverted vertical menu">
+		<div class="header item">
+			<img src="{% static 'images/logo2.png' %}">
+		</div>
+		<div class="item">
+			Documents
+			<i class="browser icon"></i>
+		</div>
+		<div class="item">
+			Charts
+			<i class="bar chart icon"></i>
+		</div>
+		<div class="item">
+			Others
+			<i class="idea icon"></i>
+		</div>
+	</div>
+	<div class="pusher">
+		<div class="ui menu">
+			<div class="header item" id="menu">
+				<i class="content icon"></i>
+                Menu
+			</div>
+			<div class="item">
+				about us
+			</div>
+			<div class="item">
+				Location
+			</div>
+			<div class="item">
+				Others
+			</div>
+		</div>
+        <div class="ui container">
+			<div class="ui divided items">
+                {% for item in ArtiInfo %}
+                    <div class="item">
+                        <div class="content">
+                            <div class="header">{{ item.title }}</div>
+                            <div class="extra">
+                                {% for tag in item.tags %}
+                                    <span class="ui label">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="description">{{ item.des }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+			</div>
+			<div class="ui small pagination menu">
+                {% if ArtiInfo.has_previous %}
+                    <a class="active item" href="?page={{ ArtiInfo.previous_page_number }}">
+                        <i class="left arrow icon"></i>
+                    </a>
+                {% endif %}
+				<div class="disable item">{{ ArtiInfo.number }} of {{ ArtiInfo.paginator.num_pages }}</div>
+                {% if ArtiInfo.has_next %}
+                    <a class="icon item" href="?page={{ ArtiInfo.next_page_number }}">
+                        <i class="right arrow icon"></i>
+                    </a>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$('#menu').click(function () {
+			$('.ui.sidebar').sidebar('toggle');
+		});
+	</script>
+</body>
+</html>

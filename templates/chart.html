@@ -1,0 +1,98 @@
+{% extends 'main.html' %}
+{% block content %}
+    <div class="ui equal width grid" style="width: 70%; margin: 5px 0 5px 0">
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment">
+                    <div class="ui compact menu">
+                        <div class="ui simple dropdown item">
+                            Area
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="item" id="CY">朝阳</div>
+                                <div class="item" id="HD">海淀</div>
+                                <div class="item" id="FT">丰台</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui container" id="container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block top5 %}
+    <script>
+    $('#CY').click(function () {
+        $('#container').highcharts({
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: '朝阳二手交易量Top5',
+                x: -20 //center
+            },
+            yAxis: {
+                title: {
+                    text: '交易量'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            series: {{ top5_CY|safe }}  {# safe为防止转译,避免出现乱码 #}
+        });
+    });
+</script>
+    <script>
+        $('#HD').click(function () {
+            $('#container').highcharts({
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: '海淀二手交易量Top5',
+                    x: -20 //center
+                },
+                yAxis: {
+                    title: {
+                        text: '交易量'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                series: {{ top5_HD|safe }}
+            });
+        });
+    </script>
+    <script>
+    $('#FT').click(function () {
+        $('#container').highcharts({
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: '丰台二手交易量Top5',
+                x: -20 //center
+            },
+            yAxis: {
+                title: {
+                    text: '交易量'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            series: {{ top5_FT|safe }}
+        });
+    });
+</script>
+{% endblock %}

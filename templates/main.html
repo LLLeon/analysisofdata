@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/semantic.css'%}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/semantic.js' %}"></script>
+    <script src="{% static 'js/exporting.js' %}"></script>
+    <script src="{% static 'js/highcharts-more.js' %}"></script>
+    <script src="{% static 'js/highcharts.js' %}"></script>
+</head>
+<body>
+	<div class="ui thin left visible sidebar inverted vertical menu">
+		<div class="header item">
+			<img src="{% static 'images/logo2.png' %}">
+		</div>
+		<div class="item">
+			<a href="http://127.0.0.1:8000/index/">
+                Documents
+            </a>
+            <i class="browser icon"></i>
+		</div>
+		<div class="item">
+            <a href="http://127.0.0.1:8000/chart/">
+			Top5
+            </a>
+            <i class="bar chart icon"></i>
+		</div>
+		<div class="item">
+            <a href="http://127.0.0.1:8000/post_times/">
+                Post times
+            </a>
+            <i class="bar chart icon"></i>
+		</div>
+        <div class="item">
+            <a href="http://127.0.0.1:8000/deal_type/">
+                Deal type
+            </a>
+            <i class="bar chart icon"></i>
+		</div>
+	</div>
+	<div class="pusher">
+		<div class="ui menu">
+			<div class="header item" id="menu">
+				Menu
+				<i class="content icon"></i>
+			</div>
+			<div class="item">
+				about us
+			</div>
+			<div class="item">
+				Location
+			</div>
+			<div class="item">
+				Others
+			</div>
+		</div>
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+	<script>
+		$('#menu').click(function () {
+			$('.ui.sidebar').sidebar('toggle');
+		});
+	</script>
+
+	{% block top5 %}
+    {% endblock %}
+
+    {% block post_times %}
+    {% endblock %}
+
+    {% block deal_type %}
+    {% endblock %}
+
+</body>
+</html>

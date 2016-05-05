@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="ui equal width grid" style="width: 70%; margin: 5px 0 5px 0">
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment">
+                    <div class="ui compact menu">
+                        <div class="ui simple dropdown item">
+                            Post times
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="item" id="post_times">detail</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui container" id="container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block post_times %}
+    <script>
+    $('#post_times').click(function () {
+        $('#container').highcharts({
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: '北京各类别二手物品发帖量',
+                x: -20 //center
+            },
+            yAxis: {
+                title: {
+                    text: 'Values'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            series: {{ post_times|safe }}  {# safe为防止转译,避免出现乱码 #}
+        });
+    });
+</script>
+{% endblock %}
