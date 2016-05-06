@@ -1,18 +1,6 @@
 from django.db import models
 from mongoengine import *
-
-
-# class ArtiInfo(Document):
-#     title = StringField()
-#     price = IntField()
-#     area = ListField(StringField())
-#     time = IntField()
-#     look = StringField()
-#     pub_date = StringField()
-#     cates = ListField(StringField())
-#     url = StringField()
-
-#     meta = {'collection': 'sample'}
+from django.utils import timezone
 
 
 class ItemInfo(Document):
@@ -26,3 +14,20 @@ class ItemInfo(Document):
     look = StringField()
 
     meta = {'collection': 'sample'}
+
+
+class Post(models.Model):
+	author = models.ForeignKey('auth.User')
+	title = models.CharField(max_length=200)
+	text = models.TextField()
+	created_date = models.DateTimeField(default=timezone.now)
+	published_date = models.DateTimeField(blank=True, null=True)
+
+
+	def publish(self):
+		self.published_date = timezone.now()
+		self.save()
+
+
+	def __str__(self):
+		return self.title
